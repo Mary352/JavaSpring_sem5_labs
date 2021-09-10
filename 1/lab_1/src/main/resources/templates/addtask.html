@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Task</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>New task:</h1>
+    <form th:action="@{/addtask}"
+          th:object="${taskform}" method="POST">
+        <p>Title:
+            <input type="text" th:field="*{title}" />
+        </p>
+        <p> YesNoMark:
+            <input type="text" th:field="*{yesNoMark}" />
+        </p>
+        <input class ="button-main-page" type="submit" value="Add" />
+    </form>
+</div>
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+</div>
+</body>
