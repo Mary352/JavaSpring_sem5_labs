@@ -34,4 +34,12 @@ public class TaskController {
 
         return modelAndView;
     }
+
+    @RequestMapping(value = {"/alltasks"}, method = RequestMethod.GET)
+    public ModelAndView taskList(Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("tasklist");
+        model.addAttribute("tasks", tasks);
+        return modelAndView;
+    }
 }

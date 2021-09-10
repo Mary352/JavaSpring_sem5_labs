@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Task List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Task List</h1>
+<h2> <a href="addtask">Add new task</a> </h2>
+<br/><br/>
+<div class="container">
+    <table class ="container" border="1">
+        <tr>
+            <th><h1>Title</h1></th>
+            <th><h1>YesNoMark</h1></th>
+        </tr>
+        <tr th:each ="task : ${tasks}">
+            <td th:utext="${task.title}">...</td>
+            <td th:utext="${task.yesNoMark}">...</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
