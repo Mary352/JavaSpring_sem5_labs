@@ -6,9 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public class TaskController {
     @Value("${error.messageNotFoundTask}")
     private String messageNotFoundTask;
 
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/", "/index"})
     public ModelAndView index(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
@@ -42,7 +40,7 @@ public class TaskController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/alltasks"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/alltasks"})
     public ModelAndView taskList(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("tasklist");
@@ -51,7 +49,7 @@ public class TaskController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/addtask"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/addtask"})
     public ModelAndView showAddTaskPage(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         TaskForm taskForm = new TaskForm();
@@ -60,7 +58,7 @@ public class TaskController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/addtask"}, method = RequestMethod.POST)
+    @PostMapping(value = {"/addtask"})
     public ModelAndView saveTask(Model model, @ModelAttribute("taskform") TaskForm taskForm) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("tasklist");
@@ -83,7 +81,7 @@ public class TaskController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/deltask"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/deltask"})
     public ModelAndView showDelTaskPage(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         TaskForm taskFormDel = new TaskForm();
@@ -92,7 +90,7 @@ public class TaskController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/deltask"}, method = RequestMethod.POST)
+    @PostMapping(value = {"/deltask"})
     public ModelAndView deleteTask(Model model, @ModelAttribute("taskformDel") TaskForm taskFormDel) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("tasklist");
@@ -125,7 +123,7 @@ public class TaskController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/updtask"}, method = RequestMethod.GET)
+    @GetMapping(value = {"/updtask"})
     public ModelAndView showUpdTaskPage(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         TaskForm taskFormFrom = new TaskForm();
@@ -136,7 +134,7 @@ public class TaskController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/updtask"}, method = RequestMethod.POST)
+    @PostMapping(value = {"/updtask"})
     public ModelAndView updateTask(Model model, @ModelAttribute("taskformFrom") TaskForm taskFormFrom, @ModelAttribute("taskformTo") TaskForm taskFormTo) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("tasklist");
