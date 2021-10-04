@@ -1,6 +1,7 @@
 package it.kryukova.springtasks.controller;
 
 import it.kryukova.springtasks.forms.TaskForm;
+import it.kryukova.springtasks.forms.UpdTaskForm;
 import it.kryukova.springtasks.model.Task;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -126,25 +127,23 @@ public class TaskController {
     @GetMapping(value = {"/updtask"})
     public ModelAndView showUpdTaskPage(Model model) {
         ModelAndView modelAndView = new ModelAndView();
-        TaskForm taskFormFrom = new TaskForm();
-        TaskForm taskFormTo = new TaskForm();
-        model.addAttribute("taskformFrom", taskFormFrom);
-        model.addAttribute("taskformTo", taskFormTo);
+        UpdTaskForm updTaskForm = new UpdTaskForm();
+        model.addAttribute("taskformUpd", updTaskForm);
         log.info("/updtask GET was called");
         return modelAndView;
     }
 
     @PostMapping(value = {"/updtask"})
-    public ModelAndView updateTask(Model model, @ModelAttribute("taskformFrom") TaskForm taskFormFrom, @ModelAttribute("taskformTo") TaskForm taskFormTo) {
+    public ModelAndView updateTask(Model model, @ModelAttribute("taskformUpd") UpdTaskForm updTaskForm) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("tasklist");
 
         log.info("/updtask POST was called");
 
-        String titleFrom = taskFormFrom.getTitle();
-        String yesNoMarkFrom = taskFormFrom.getYesNoMark();
-        String titleTo = taskFormTo.getTitle();
-        String yesNoMarkTo = taskFormTo.getYesNoMark();
+        String titleFrom = updTaskForm.getTitleFrom();
+        String yesNoMarkFrom = updTaskForm.getYesNoMarkFrom();
+        String titleTo = updTaskForm.getTitleTo();
+        String yesNoMarkTo = updTaskForm.getYesNoMarkTo();
 
         Task taskFrom = new Task(titleFrom, yesNoMarkFrom);
         if (!tasks.contains(taskFrom))

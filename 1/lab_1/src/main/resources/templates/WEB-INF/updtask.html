@@ -9,29 +9,30 @@
 <div class="container">
     <h1>Update task:</h1>
 
-    <h2>Update From:</h2>
     <form th:action="@{/updtask}"
-          th:object="${taskformFrom}" method="POST">
+          th:object="${taskformUpd}" method="POST">
+        <p>Update From:</p>
         <p>Title:
-            <input type="text" th:field="*{title}" />
+            <input type="text" th:field="*{titleFrom}" />
         </p>
         <p> YesNoMark:
-            <input type="text" th:field="*{yesNoMark}" />
+            <input type="text" th:field="*{yesNoMarkFrom}" />
         </p>
-        <input class ="button-main-page" type="submit" value="Add" />
+
+        <p>Update To:</p>
+
+        <p>Title:
+            <input type="text" th:field="*{titleTo}" />
+        </p>
+        <p> YesNoMark:
+            <input type="text" th:field="*{yesNoMarkTo}" />
+        </p>
+
+        <input class ="button-main-page" type="submit" value="Update" />
     </form>
 
-    <h2>Update To:</h2>
-    <form th:action="@{/updtask}"
-          th:object="${taskformTo}" method="POST">
-        <p>Title:
-            <input type="text" th:field="*{title}" />
-        </p>
-        <p> YesNoMark:
-            <input type="text" th:field="*{yesNoMark}" />
-        </p>
-        <input class ="button-main-page" type="submit" value="Add" />
-    </form>
+
+
 
 </div>
 <div th:if="${errorMessage}" th:utext="${errorMessage}"
