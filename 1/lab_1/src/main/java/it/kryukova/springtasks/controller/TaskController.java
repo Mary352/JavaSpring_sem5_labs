@@ -28,6 +28,9 @@ public class TaskController {
     @Value("${error.message}")
     private String errorMessage;
 
+    @Value("${error.messageNotFoundTask}")
+    private String messageNotFoundTask;
+
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView index(Model model) {
         ModelAndView modelAndView = new ModelAndView();
@@ -75,4 +78,46 @@ public class TaskController {
         modelAndView.setViewName("addtask");
         return modelAndView;
     }
+
+    @RequestMapping(value = {"/deltask"}, method = RequestMethod.GET)
+    public ModelAndView showDelTaskPage(Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        TaskForm taskFormDel = new TaskForm();
+        model.addAttribute("taskformDel", taskFormDel);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/deltask"}, method = RequestMethod.POST)
+    public ModelAndView deleteTask(Model model, @ModelAttribute("taskformDel") TaskForm taskFormDel) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("tasklist");
+        String title = taskFormDel.getTitle();
+        String yesNoMark = taskFormDel.getYesNoMark();
+
+        for (Task task : tasks)
+        {
+            if (task.getTitle().equals(title) && task.getYesNoMark().equals(yesNoMark))
+            {
+                tasks.remove(task);
+                model.addAttribute("tasks", tasks);
+                modelAndView.setViewName("deltask");
+                return modelAndView;
+            }
+        }
+
+        // если выполнение дошло до этого блока, значит задача не найдена
+        if (true)
+        {
+            model.addAttribute("errorMessage", messageNotFoundTask);
+            modelAndView.setViewName("deltask");
+            return modelAndView;
+        }
+
+        model.addAttribute("errorMessage", errorMessage);
+        modelAndView.setViewName("deltask");
+        return modelAndView;
+    }
+
+
 }

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>New task:</h1>
+    <h1>Add task:</h1>
     <form th:action="@{/addtask}"
           th:object="${taskform}" method="POST">
         <p>Title:
@@ -18,8 +18,11 @@
         </p>
         <input class ="button-main-page" type="submit" value="Add" />
     </form>
+
+
 </div>
 <div th:if="${errorMessage}" th:utext="${errorMessage}"
      style="color:red;font-style:italic;">
 </div>
 </body>
+</html>
